@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BMI Calculator</title>
+</head>
+<body>
+    <h2>We will calculate your BMI - by Luis</h2>
+    <input type="number" id="height" placeholder="Enter your height in inches.">
+    <input type="number" id="weight" placeholder="Enter your weight in lbs.">
+    <button onclick="calculateBMI()">Calculate BMI</button>
+    <p>Your BMI is: <span id="BMI"></span></p>
+	<p>This means that: <span id="meaning"></span></p>
+	<script>
+        function calculateBMI() {
+            // Get the values from the input fields
+            let height = parseFloat(document.getElementById('height').value);
+            let weight = parseFloat(document.getElementById('weight').value);
+            
+            // Calculate the BMI
+			let BMI = (weight*703)/(height*height);
+			let meaning;
+            if (BMI < 18.5) {
+				meaning = "You are underweight";
+			} else if (BMI < 25) {
+			meaning = "You are Health!!!";
+			} else if (BMI < 30) {
+			meaning = "You are overweight!!!";
+		} else {
+		meaning = "You are obese";
+}
+            // Display the result
+            document.getElementById('BMI').textContent = BMI;
+			 // Display the meaning
+            document.getElementById('meaning').textContent = meaning;
+        }
+		
+    </script>
+</body>
+</html>
+
