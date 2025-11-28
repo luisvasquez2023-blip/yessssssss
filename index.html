@@ -1,39 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>BMI Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Grade Calculator</title>
+    <style>
+        /* Essential layout styles - no fancy colors */
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 40px; 
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        button {
+            background-color: #ddd; 
+            cursor: pointer;
+        }
+        #result-display { 
+            margin-top: 15px; 
+            padding: 10px; 
+            border: 1px solid #ccc;
+            background-color: #eee;
+        }
+    </style>
 </head>
 <body>
-    <h2>We will calculate your BMI - by Luis</h2>
-    <input type="number" id="height" placeholder="Enter your height in inches.">
-    <input type="number" id="weight" placeholder="Enter your weight in lbs.">
-    <button onclick="calculateBMI()">Calculate BMI</button>
-    <p>Your BMI is: <span id="BMI"></span></p>
-	<p>This means that: <span id="meaning"></span></p>
-	<script>
-        function calculateBMI() {
-            // Get the values from the input fields
-            let height = parseFloat(document.getElementById('height').value);
-            let weight = parseFloat(document.getElementById('weight').value);
+    <div class="container">
+        <h2>Grade Checker</h2>
+        <p>Enter score (0-100):</p>
+
+        <input type="number" id="score" placeholder="Score">
+        <button onclick="checkGrade()">Check Grade</button>
+
+        <div id="result-display">
+            Result will show here.
+        </div>
+    </div>
+
+    <script>
+        // Core function to check the score
+        function checkGrade() {
+            const scoreInput = document.getElementById('score');
+            const resultDisplay = document.getElementById('result-display');
             
-            // Calculate the BMI
-			let BMI = (weight*703)/(height*height);
-			let meaning;
-            if (BMI < 18.5) {
-				meaning = "You are underweight";
-			} else if (BMI < 25) {
-			meaning = "You are Health!!!";
-			} else if (BMI < 30) {
-			meaning = "You are overweight!!!";
-		} else {
-		meaning = "You are obese";
-}
-            // Display the result
-            document.getElementById('BMI').textContent = BMI;
-			 // Display the meaning
-            document.getElementById('meaning').textContent = meaning;
+            let score = parseFloat(scoreInput.value); 
+            let message = ''; 
+
+            // Input Validation
+            if (isNaN(score) || score < 0 || score > 100) {
+                message = 'Error: Enter 0-100.';
+            } 
+            // Grading Logic (A: 85+, B: 75+, C: 65+, D: 50+, F: <50)
+            else if (score >= 85) {
+                message = 'Score: ' + score + '. Grade: A';
+            } 
+            else if (score >= 75) {
+                message = 'Score: ' + score + '. Grade: B';
+            } 
+            else if (score >= 65) {
+                message = 'Score: ' + score + '. Grade: C';
+            } 
+            else if (score >= 50) {
+                message = 'Score: ' + score + '. Grade: D';
+            } 
+            else {
+                message = 'Score: ' + score + '. Grade: F';
+            }
+
+            // Output the result
+            resultDisplay.textContent = message;
         }
-		
     </script>
 </body>
 </html>
